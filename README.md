@@ -1,5 +1,5 @@
 # FP is a lightweight functional programming library
-## [Sample document]()
+## [Sample document](http://htmlpreview.github.io/?https://github.com/stfujnkk/fp/blob/main/docs/fp%20-%20Go%20Documentation%20Server.htm)
 ---
 ## Main interface
 ```txt
@@ -20,4 +20,8 @@ type HalfFunc func(...interface{}) interface{}
     func Currying(p, fx interface{}) HalfFunc
     func Pipe(fx1, fx2 interface{}) HalfFunc
 ```
-## [Future plans]()
+## Future plans
+In the future, it will join the goruntine pool
+Improve concurrency efficiency.
+
+Add some functional functions, such as TakeWhile, Generator and Infinite list.
