@@ -21,29 +21,17 @@ func ExampleFmap2() {
 	// Output:[]int{16, 49}
 }
 
-type Student struct {
-	id   int
-	name string
-}
-
-func NewStudent(id int, name string) Student {
-	return Student{
-		id:   id,
-		name: name,
-	}
-}
-
 func ExampleZipWith() {
-	// type Student struct {
-	// 	id   int
-	// 	name string
-	// }
-	// func NewStudent(id int, name string) Student {
-	// 	return Student{
-	// 		id:   id,
-	// 		name: name,
-	// 	}
-	// }
+	type Student struct {
+		id   int
+		name string
+	}
+	NewStudent := func(id int, name string) Student {
+		return Student{
+			id:   id,
+			name: name,
+		}
+	}
 	names, ids := []string{"Jack", "John"}, []int{7, 3, 11}
 	fmt.Printf("%#v\n", ZipWith(NewStudent, ids, names))
 	// Output:
@@ -51,16 +39,16 @@ func ExampleZipWith() {
 }
 
 func ExampleZipWith2() {
-	// type Student struct {
-	// 	id   int
-	// 	name string
-	// }
-	// func NewStudent(id int, name string) Student {
-	// 	return Student{
-	// 		id:   id,
-	// 		name: name,
-	// 	}
-	// }
+	type Student struct {
+		id   int
+		name string
+	}
+	NewStudent := func(id int, name string) Student {
+		return Student{
+			id:   id,
+			name: name,
+		}
+	}
 	names, ids := []string{"Jack", "John"}, []int{7, 3, 11}
 	stus := make([]Student, 10)
 	n := ZipWith2(NewStudent, ids, names, &stus)
