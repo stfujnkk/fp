@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#375EAB">
+	<title>fp - Go Documentation Server</title>
+	<base href="//stfujnkk.github.io/fp/">
+	<link type="text/css" rel="stylesheet" href="lib/style.css">
+	<script>window.initFuncs = [];</script>
+	<script src="lib/jquery.txt" defer="defer"></script>
+	<script>var goVersion = "go1.16.2";</script>
+	<script src="lib/godocs.txt" defer="defer"></script>
+</head>
+
+<body>
+
+	<div id="lowframe"
+		style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+		...
+	</div><!-- #lowframe -->
+
+	<div id="topbar" class="wide">
+		<div class="container">
+			<div class="top-heading" id="heading-wide"><a href="//pkg.go.dev/">Go Documentation Server</a></div>
+			<div class="top-heading" id="heading-narrow"><a href="//pkg.go.dev/">GoDoc</a></div>
+			<a href="#" id="menu-button"><span id="menu-button-arrow">▽</span></a>
+			<form method="GET" action="/search">
+				<div id="menu" style="min-width: 60px;">
+
+					<span class="search-box"><input type="search" id="search" name="q" placeholder="Search"
+							aria-label="Search" required=""><button type="submit"><span>
+								<!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24">
+									<title>submit search</title>
+									<path
+										d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+									</path>
+									<path d="M0 0h24v24H0z" fill="none"></path>
+								</svg>
+							</span></button></span>
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+
+
+	<div id="page" class="wide" style="outline: currentcolor none 0px;" tabindex="-1">
+		<div class="container">
+
+
+			<h1>
+				Package fp
+				<span class="text-muted"></span>
+			</h1>
+
+
+
+
+
+
+
+			<div id="nav"></div>
+
+
+			<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+			<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+			<script>
+				document.ANALYSIS_DATA = null;
+				document.CALLGRAPH = null;
+			</script>
+
+
+
+			<div id="short-nav">
+				<dl>
+					<dd><code>import "github.com/stfujnkk/fp"</code></dd>
+				</dl>
+				<dl>
+					<dd><a href="#pkg-overview" class="overviewLink">Overview</a></dd>
+					<dd><a href="#pkg-index" class="indexLink">Index</a></dd>
+
+					<dd><a href="#pkg-examples" class="examplesLink">Examples</a></dd>
+
+
+					<dd><a href="#pkg-subdirectories">Subdirectories</a></dd>
+
+				</dl>
+			</div>
+			<!-- The package's Name is printed as title by the top-level template -->
+			<div id="pkg-overview" class="toggleVisible">
+				<div class="collapsed">
+					<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+				</div>
+				<div class="expanded">
+					<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+					<p>
+						简易函数式编程库
+						Simple functional programming library
+					</p>
+
+
+				</div>
+			</div>
+
+			<div id="pkg-index" class="toggleVisible">
+				<div class="collapsed">
+					<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+				</div>
+				<div class="expanded">
+					<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+					<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+					<div id="manual-nav">
+						<dl>
+
+
+
+
+							<dd><a href="#Filter">func Filter(fx interface{}, arr interface{}) []interface{}</a></dd>
+
+
+							<dd><a href="#Filter2">func Filter2(fx, arr, resPtr interface{}) int</a></dd>
+
+
+							<dd><a href="#Flat">func Flat(arr interface{}) []interface{}</a></dd>
+
+
+							<dd><a href="#Flat2">func Flat2(arr interface{}, resPtr interface{}) int</a></dd>
+
+
+							<dd><a href="#Fmap">func Fmap(fx interface{}, arr interface{}) []interface{}</a></dd>
+
+
+							<dd><a href="#Fmap2">func Fmap2(fx, arr, resPtr interface{}) int</a></dd>
+
+
+							<dd><a href="#Fold">func Fold(fx, arr interface{}) interface{}</a></dd>
+
+
+							<dd><a href="#Fold2">func Fold2(fx, arr, resPtr interface{})</a></dd>
+
+
+							<dd><a href="#Group">func Group(mask int64, arr interface{})
+									map[interface{}][]interface{}</a></dd>
+
+
+							<dd><a href="#GroupReduce">func GroupReduce(mask int64, reducer, res, arr interface{})
+									int</a></dd>
+
+
+							<dd><a href="#Reduce">func Reduce(fx, resPtr, arr interface{})</a></dd>
+
+
+							<dd><a href="#UnzipWith">func UnzipWith(fx, arr interface{}) ([]interface{},
+									[]interface{})</a></dd>
+
+
+							<dd><a href="#UnzipWith2">func UnzipWith2(fx, arr, resPtr1, resPtr2 interface{}) int</a>
+							</dd>
+
+
+							<dd><a href="#ZipWith">func ZipWith(fx, arr1, arr2 interface{}) []interface{}</a></dd>
+
+
+							<dd><a href="#ZipWith2">func ZipWith2(fx, arr1, arr2, resPtr interface{}) int</a></dd>
+
+
+
+							<dd><a href="#HalfFunc">type HalfFunc</a></dd>
+
+
+							<dd>&nbsp; &nbsp; <a href="#Currying">func Currying(fx interface{}, p ...interface{})
+									HalfFunc</a></dd>
+
+
+							<dd>&nbsp; &nbsp; <a href="#Pipe">func Pipe(fx1, fx2 interface{}) HalfFunc</a></dd>
+
+
+
+
+						</dl>
+					</div><!-- #manual-nav -->
+
+
+					<div id="pkg-examples">
+						<h3>Examples</h3>
+						<div class="js-expandAll expandAll collapsed">(Expand All)</div>
+						<dl>
+
+							<dd><a class="exampleLink" href="#example_Currying">Currying</a></dd>
+
+							<dd><a class="exampleLink" href="#example_Filter">Filter</a></dd>
+
+							<dd><a class="exampleLink" href="#example_Filter2">Filter2</a></dd>
+
+							<dd><a class="exampleLink" href="#example_Flat">Flat</a></dd>
+
+							<dd><a class="exampleLink" href="#example_Flat2">Flat2</a></dd>
+
+							<dd><a class="exampleLink" href="#example_Fmap">Fmap</a></dd>
+
+							<dd><a class="exampleLink" href="#example_Fmap2">Fmap2</a></dd>
+
+							<dd><a class="exampleLink" href="#example_Fold">Fold</a></dd>
+
+							<dd><a class="exampleLink" href="#example_Fold2">Fold2</a></dd>
+
+							<dd><a class="exampleLink" href="#example_Group">Group</a></dd>
+
+							<dd><a class="exampleLink" href="#example_GroupReduce">GroupReduce</a></dd>
+
+							<dd><a class="exampleLink" href="#example_Pipe">Pipe</a></dd>
+
+							<dd><a class="exampleLink" href="#example_Reduce">Reduce</a></dd>
+
+							<dd><a class="exampleLink" href="#example_UnzipWith">UnzipWith</a></dd>
+
+							<dd><a class="exampleLink" href="#example_UnzipWith2">UnzipWith2</a></dd>
+
+							<dd><a class="exampleLink" href="#example_ZipWith">ZipWith</a></dd>
+
+							<dd><a class="exampleLink" href="#example_ZipWith2">ZipWith2</a></dd>
+
+						</dl>
+					</div>
+
+
+
+					<h3>Package files</h3>
+					<p>
+						<span style="font-size:90%">
+
+							<a href="https://github.com/stfujnkk/fp/blob/main/fp.go">fp.go</a>
+
+						</span>
+					</p>
+
+				</div><!-- .expanded -->
+			</div><!-- #pkg-index -->
+
+
+
+
+
+
+
+
+			<h2 id="Filter">func <a href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=868:926#L42">Filter</a>
+				<a class="permalink" href="#Filter">¶</a>
+
+
+			</h2>
+			<pre>func Filter(fx interface{}, arr interface{}) []interface{}</pre>
+			<p>
+				fx 过滤函数, arr待处理列表。
+				用fx过滤arr中元素。
+				fx返回为真时保留,假时剔除。
+			</p>
+			<p>
+				FX filter function, arr pending list.
+				Filter elements in arr with FX.
+				If FX returns true, it will be retained and if false, it will be rejected.
+			</p>
+
+			<div id="example_Filter" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code">ids := []int{23, 90, 67, 6878, 90, 8}
+fx := func(x int) bool {
+    return x &gt;= 90
+}
+fmt.Printf("%#v\n", Filter(fx, ids))
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">[]interface {}{90, 6878, 90}
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+			<h2 id="Filter2">func <a href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=2288:2333#L88">Filter2</a>
+				<a class="permalink" href="#Filter2">¶</a>
+
+
+			</h2>
+			<pre>func Filter2(fx, arr, resPtr interface{}) <a href="//pkg.go.dev/builtin/#int">int</a></pre>
+			<p>
+				fx 过滤函数, arr待处理列表,resPtr 用于存储结果的地址,返回值为结果长度。
+				与Filter函数作用一样,只不过可以通过resPtr存储结果,并指定类型。
+				需要注意的是resPtr如果是切片或数组类型需要预留好足够空间。
+			</p>
+			<p>
+				FX filter function, arr pending list, resptr address used to store
+				results,
+				The return value is the result length.
+				The function is the same as the filter function, except that the result
+				can be stored through resptr and the type can be specified.
+				It should be noted that if resptr is a slice or array type, enough space
+				should be reserved.
+			</p>
+
+			<div id="example_Filter2" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code">ids := []int{23, 90, 67, 6878, 90, 8}
+fx := func(x int) bool {
+    return x &gt;= 90
+}
+n := Filter2(fx, ids, &amp;ids)
+fmt.Printf("%#v\n", ids[:n])
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">[]int{90, 6878, 90}
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+			<h2 id="Flat">func <a href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=2476:2516#L100">Flat</a>
+				<a class="permalink" href="#Flat">¶</a>
+
+
+			</h2>
+			<pre>func Flat(arr interface{}) []interface{}</pre>
+			<p>
+				展开arr中各个元素
+			</p>
+			<p>
+				Expand the elements in the arr
+			</p>
+
+			<div id="example_Flat" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code">var copyNum = func(a int) (int, int) {
+    return a, a
+}
+arr := Fmap(copyNum, []int{7, 9})
+fmt.Printf("%#v\n", arr)
+fmt.Printf("%#v\n", Flat(arr))
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">[]interface {}{[]interface {}{7, 7}, []interface {}{9, 9}}
+[]interface {}{7, 7, 9, 9}
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+			<h2 id="Flat2">func <a href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=2850:2901#L115">Flat2</a>
+				<a class="permalink" href="#Flat2">¶</a>
+
+
+			</h2>
+			<pre>func Flat2(arr interface{}, resPtr interface{}) <a href="//pkg.go.dev/builtin/#int">int</a></pre>
+			<p>
+				展开arr中各个元素,并把结果存到resPtr。返回值为结果长度
+			</p>
+			<p>
+				Expand the elements in arr and save the results to resptr. The return value is the result length
+			</p>
+
+			<div id="example_Flat2" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code">var copyNum = func(a int) (int, int) {
+    return a, a
+}
+arr := Fmap(copyNum, []int{7, 9})
+fmt.Printf("%#v\n", arr)
+var res [6]int
+n := Flat2(arr, &amp;res)
+fmt.Printf("%#v\n", res[:n])
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">[]interface {}{[]interface {}{7, 7}, []interface {}{9, 9}}
+[]int{7, 7, 9, 9}
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+			<h2 id="Fmap">func <a href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=3059:3115#L127">Fmap</a>
+				<a class="permalink" href="#Fmap">¶</a>
+
+
+			</h2>
+			<pre>func Fmap(fx interface{}, arr interface{}) []interface{}</pre>
+			<p>
+				对arr中每个元素应用一次fx
+			</p>
+			<p>
+				Apply FX once to each element in the arr
+			</p>
+
+			<div id="example_Fmap" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code">square := func(a int) int {
+    return a * a
+}
+fmt.Printf("%#v\n", Fmap(square, []int{4, 7}))
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">[]interface {}{16, 49}
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+			<h2 id="Fmap2">func <a href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=5892:5935#L239">Fmap2</a>
+				<a class="permalink" href="#Fmap2">¶</a>
+
+
+			</h2>
+			<pre>func Fmap2(fx, arr, resPtr interface{}) <a href="//pkg.go.dev/builtin/#int">int</a></pre>
+			<p>
+				对arr中每个元素应用一次fx,并把结果存到resPtr。返回值为结果长度。
+			</p>
+			<p>
+				Apply FX to each element in arr once and save the result in resptr. The return value is the result
+				length.
+			</p>
+
+			<div id="example_Fmap2" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code">square := func(a int) int {
+    return a * a
+}
+var res [10]int
+n := Fmap2(square, []int{4, 7}, &amp;res)
+fmt.Printf("%#v\n", res[:n])
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">[]int{16, 49}
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+			<h2 id="Fold">func <a href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=4598:4640#L189">Fold</a>
+				<a class="permalink" href="#Fold">¶</a>
+
+
+			</h2>
+			<pre>func Fold(fx, arr interface{}) interface{}</pre>
+			<p>
+				对arr中的元素两两应用fx函数。
+				若arr长度为0返回nil,长度为1返回原数组。
+			</p>
+			<p>
+				Apply the FX function to every two elements in the arr.
+				If the ARR length is 0, nil is returned, and if the ARR length is 1, the original array is returned.
+			</p>
+
+			<div id="example_Fold" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code">ids := []int{-23, 90, 67, 90, 8}
+sum := func(x, y int) int {
+    return x + y
+}
+fmt.Printf("%T : %v\n", Fold(sum, ids), Fold(sum, ids))
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">int : 232
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+			<h2 id="Fold2">func <a href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=5203:5242#L210">Fold2</a>
+				<a class="permalink" href="#Fold2">¶</a>
+
+
+			</h2>
+			<pre>func Fold2(fx, arr, resPtr interface{})</pre>
+			<p>
+				对arr中的元素两两应用fx函数,结果存入resPtr。
+				若arr长度为0返回nil,长度为1返回原数组。
+			</p>
+			<p>
+				Apply the FX function to two elements in arr, and store the result in resptr.
+				If the ARR length is 0, nil is returned, and if the ARR length is 1, the original array is returned.
+			</p>
+
+			<div id="example_Fold2" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code">ids := []int{-23, 90, 67, 90, 8}
+sum := func(x, y int) int {
+    return x + y
+}
+a := 0
+Fold2(sum, ids, &amp;a)
+fmt.Printf("%T : %v\n", a, a)
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">int : 232
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+			<h2 id="Group">func <a href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=9402:9471#L362">Group</a>
+				<a class="permalink" href="#Group">¶</a>
+
+
+			</h2>
+			<pre>func Group(mask <a href="//pkg.go.dev/builtin/#int64">int64</a>, arr interface{}) map[interface{}][]interface{}</pre>
+			<p>
+				根据mask对arr分组，返回map。map键的类型为byte数组。注意不是切片,golang中切片无法比较。
+			</p>
+			<p>
+				Group arr according to mask and return map. The type of map key is byte
+				array. Note that it is not a slice. Slices in golang cannot be compared.
+			</p>
+
+			<div id="example_Group" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code"><span class="comment">// 药品信息结构体</span>
+<span class="comment">// Drug information structure</span>
+type Drug struct {
+    Name        string
+    Producer    string
+    Price       float32
+    salesVolume int
+}
+data := []Drug{
+    {"氟哌酸", "上海医药", 10.13, 476},
+    {"氟哌酸", "智飞生物", 12.01, 312},
+    {"洛贝林", "石药集团", 5.89, 621},
+    {"甲硝唑", "哈药集团", 3.13, 781},
+    {"洛贝林", "恒瑞", 6.54, 437},
+}
+<span class="comment">// 根据药品名称分组</span>
+<span class="comment">// Grouping by drug name</span>
+m := Group(1, data)
+drugs := make([]Drug, 0, len(m))
+<span class="comment">// 不保证顺序</span>
+<span class="comment">// Sequence is not guaranteed</span>
+k := kit.Mask(1, data[0])
+for _, v := range m[k] {
+    drugs = append(drugs, v.(Drug))
+}
+fmt.Println(drugs)
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">[{氟哌酸 上海医药 10.13 476} {氟哌酸 智飞生物 12.01 312}]
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+			<h2 id="GroupReduce">func <a
+					href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=10044:10107#L386">GroupReduce</a>
+				<a class="permalink" href="#GroupReduce">¶</a>
+
+
+			</h2>
+			<pre>func GroupReduce(mask <a href="//pkg.go.dev/builtin/#int64">int64</a>, reducer, res, arr interface{}) <a href="//pkg.go.dev/builtin/#int">int</a></pre>
+			<p>
+				根据mask对arr分组，对每组列表的元素都应用一次reducer函数,并把结果存在res里。
+				最后返回结果列表长度。
+			</p>
+			<p>
+				Group the ARR according to the mask, apply the reducer function to the elements of each list, and store
+				the results in res.
+				Length of the last returned result list.
+			</p>
+
+			<div id="example_GroupReduce" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code"><span class="comment">// 药品信息结构体</span>
+<span class="comment">// Drug information structure</span>
+type Drug struct {
+    Name        string
+    Producer    string
+    Price       float32
+    salesVolume int
+}
+data := []Drug{
+    {"氟哌酸", "上海医药", 10.13, 476},
+    {"氟哌酸", "智飞生物", 12.01, 312},
+    {"洛贝林", "石药集团", 5.89, 621},
+    {"甲硝唑", "哈药集团", 3.13, 781},
+    {"洛贝林", "恒瑞", 6.54, 437},
+}
+<span class="comment">// 药品销售额结构体</span>
+<span class="comment">// Drug sales structure</span>
+type SaleOfDrug struct {
+    Name        string
+    TotalAmount float32
+}
+<span class="comment">// 统计函数</span>
+<span class="comment">// Statistical function</span>
+acc := func(s *SaleOfDrug, d Drug) {
+    if s == nil {
+        <span class="comment">// 统计第一个时创建一个 SaleOfDrug</span>
+        <span class="comment">// Create a SaleOfDrug when counting the first</span>
+        s = &amp;SaleOfDrug{
+            d.Name,
+            d.Price * float32(d.salesVolume),
+        }
+    } else {
+        (*s).Name = d.Name
+        (*s).TotalAmount += d.Price * float32(d.salesVolume)
+    }
+}
+res := make([]SaleOfDrug, 30)
+n := GroupReduce(1, acc, &amp;res, data)
+fmt.Println(res[:n])
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">[{氟哌酸 8569} {洛贝林 6515.67} {甲硝唑 2444.53}]
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+			<h2 id="Reduce">func <a href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=7294:7334#L293">Reduce</a>
+				<a class="permalink" href="#Reduce">¶</a>
+
+
+			</h2>
+			<pre>func Reduce(fx, resPtr, arr interface{})</pre>
+			<p>
+				fx函数应接收两个参数,一个为resPtr,另一个为arr中的元素。
+				该函数遍历arr,并调用fx函数。
+			</p>
+			<p>
+				The FX function should take two arguments, one resptr and the other an element in arr.
+				This function traverses the ARR and calls the FX function.
+			</p>
+
+			<div id="example_Reduce" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code">box := make([]float64, 0, 10)
+data := []float64{5, 76, 67, 69, 70, -7, 8}
+collect := func(r *[]float64, b float64) {
+    *r = append(*r, b)
+}
+Reduce(collect, &amp;box, data)
+fmt.Printf("%#v\n", box)
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">[]float64{5, 76, 67, 69, 70, -7, 8}
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+			<h2 id="UnzipWith">func <a
+					href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=7562:7628#L306">UnzipWith</a>
+				<a class="permalink" href="#UnzipWith">¶</a>
+
+
+			</h2>
+			<pre>func UnzipWith(fx, arr interface{}) ([]interface{}, []interface{})</pre>
+			<p>
+				通过fx,分裂列表arr。
+			</p>
+			<p>
+				Split the list arr through FX.
+			</p>
+
+			<div id="example_UnzipWith" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code">var copyNum = func(a int) (int, int) {
+    return a, a
+}
+a, b := UnzipWith(copyNum, []int{7, -2, 0})
+fmt.Printf("%#v\n", a)
+fmt.Printf("%#v\n", b)
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">[]interface {}{7, -2, 0}
+[]interface {}{7, -2, 0}
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+			<h2 id="UnzipWith2">func <a
+					href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=8064:8122#L322">UnzipWith2</a>
+				<a class="permalink" href="#UnzipWith2">¶</a>
+
+
+			</h2>
+			<pre>func UnzipWith2(fx, arr, resPtr1, resPtr2 interface{}) <a href="//pkg.go.dev/builtin/#int">int</a></pre>
+			<p>
+				通过fx,分裂列表arr,并把结果存入 resPtr1, resPtr2。
+			</p>
+			<p>
+				Split the list arr through FX and store the results in resptr1 and resptr2.
+			</p>
+
+			<div id="example_UnzipWith2" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code">var copyNum = func(a int) (int, int) {
+    return a, a
+}
+var a, b [8]int
+n := UnzipWith2(copyNum, []int{7, -2, 0}, &amp;a, &amp;b)
+fmt.Printf("%#v\n", a[:n])
+fmt.Printf("%#v\n", b[:n])
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">[]int{7, -2, 0}
+[]int{7, -2, 0}
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+			<h2 id="ZipWith">func <a href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=3626:3680#L155">ZipWith</a>
+				<a class="permalink" href="#ZipWith">¶</a>
+
+
+			</h2>
+			<pre>func ZipWith(fx, arr1, arr2 interface{}) []interface{}</pre>
+			<p>
+				通过fx函数合并arr1和arr2
+			</p>
+			<p>
+				Merge Arr1 and arr2 through FX function
+			</p>
+
+			<div id="example_ZipWith" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code">type Student struct {
+    id   int
+    name string
+}
+NewStudent := func(id int, name string) Student {
+    return Student{
+        id:   id,
+        name: name,
+    }
+}
+names, ids := []string{"Jack", "John"}, []int{7, 3, 11}
+fmt.Printf("%#v\n", ZipWith(NewStudent, ids, names))
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">[]interface {}{fp.Student{id:7, name:"Jack"}, fp.Student{id:3, name:"John"}}
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+			<h2 id="ZipWith2">func <a
+					href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=4194:4247#L175">ZipWith2</a>
+				<a class="permalink" href="#ZipWith2">¶</a>
+
+
+			</h2>
+			<pre>func ZipWith2(fx, arr1, arr2, resPtr interface{}) <a href="//pkg.go.dev/builtin/#int">int</a></pre>
+			<p>
+				通过fx函数合并arr1和arr2,并把结果存到resPtr。返回值为结果长度
+			</p>
+			<p>
+				Merge Arr1 and arr2 through the FX function and save the results in resptr. The return value is the
+				result length.
+			</p>
+
+			<div id="example_ZipWith2" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code">type Student struct {
+    id   int
+    name string
+}
+NewStudent := func(id int, name string) Student {
+    return Student{
+        id:   id,
+        name: name,
+    }
+}
+names, ids := []string{"Jack", "John"}, []int{7, 3, 11}
+stus := make([]Student, 10)
+n := ZipWith2(NewStudent, ids, names, &amp;stus)
+fmt.Printf("%#v\n", stus[:n])
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">[]fp.Student{fp.Student{id:7, name:"Jack"}, fp.Student{id:3, name:"John"}}
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+
+			<h2 id="HalfFunc">type <a
+					href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=6073:6119#L251">HalfFunc</a>
+				<a class="permalink" href="#HalfFunc">¶</a>
+
+
+			</h2>
+			<p>
+				半函数。
+			</p>
+			<p>
+				Function with partial parameters fixed.
+			</p>
+
+			<pre>type HalfFunc func(...interface{}) interface{}</pre>
+
+
+
+
+
+
+
+
+
+
+
+			<h3 id="Currying">func <a
+					href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=6381:6437#L262">Currying</a>
+				<a class="permalink" href="#Currying">¶</a>
+
+
+			</h3>
+			<pre>func Currying(fx interface{}, p ...interface{}) <a href="#HalfFunc">HalfFunc</a></pre>
+			<p>
+				p 为参数列表,fx 为函数。
+				返回一个HalfFunc。
+				Currying可以固定一个函数的前几个参数。
+			</p>
+			<p>
+				P is the parameter list and FX is the function. Returns a HalfFunc.
+				Currying can fix the first few parameters of a function.
+			</p>
+
+			<div id="example_Currying" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code">add2 := func(a, b int) int {
+    return a + b
+}
+add1 := Currying(add2, 7)
+fmt.Printf("%T : %v\n", add1(2), add1(2))
+<span class="comment">// 连续柯里化</span>
+<span class="comment">// Compound Currying</span>
+res := Currying(add1, 3)
+fmt.Printf("%T : %v\n", res(), res())
+<span class="comment">// 固定多个参数</span>
+<span class="comment">// Fix multiple parameters</span>
+res2 := Currying(add2, 7, 9)
+fmt.Printf("%T : %v\n", res2(), res2())
+<span class="comment">// 和Fmap复合使用</span>
+<span class="comment">// Combined with fmap</span>
+fmt.Printf("%#v\n", Fmap(add1, []int{4, -3}))
+<span class="comment">// 多返回值</span>
+<span class="comment">// Multiple return values</span>
+swap2 := func(a, b int) (int, int) {
+    return b, a
+}
+swap1 := Currying(swap2, 7)
+swap0 := Currying(swap1, 3)
+fmt.Printf("%#v\n", swap0())
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">int : 9
+int : 10
+int : 16
+[]interface {}{11, 4}
+[]interface {}{3, 7}
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+			<h3 id="Pipe">func <a href="https://github.com/stfujnkk/fp/blob/main/fp.go?s=8662:8702#L341">Pipe</a>
+				<a class="permalink" href="#Pipe">¶</a>
+
+
+			</h3>
+			<pre>func Pipe(fx1, fx2 interface{}) <a href="#HalfFunc">HalfFunc</a></pre>
+			<p>
+				组合两个函数,返回一个 HalfFunc。
+				返回的函数会把收到的参数尽量给fx1。
+				fx1的结果和余下的参数作为fx2的参数。
+				最终返回fx2的结果。
+			</p>
+			<p>
+				Combine two functions to return a HalfFunc.
+				The returned function will give the received parameters to FX1 as much as possible.
+				The result of FX1 and the remaining parameters are the parameters of FX2.
+				Finally, the result of FX2 is returned.
+			</p>
+
+			<div id="example_Pipe" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code">var copyNum = func(a int) (int, int) {
+    return a, a
+}
+add2 := func(a, b int) int {
+    return a + b
+}
+<span class="comment">// 部分参数作为第一个函数的参数</span>
+<span class="comment">// Some parameters are used as parameters of the first function</span>
+square := func(a int) int {
+    return a * a
+}
+f1 := Pipe(square, add2)
+fmt.Printf("%#v\n", f1(-2, 7))
+<span class="comment">// 全部参数作为第一个函数的参数</span>
+<span class="comment">// All parameters are the parameters of the first function</span>
+f2 := Pipe(copyNum, func(a, b int) int {
+    return a * b
+})
+fmt.Printf("%#v\n", f2(8))
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">11
+64
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<h2 id="pkg-subdirectories">Subdirectories <a class="permalink" href="#pkg-subdirectories">¶</a></h2>
+
+			<div class="pkg-dir">
+				<table>
+					<tbody>
+						<tr>
+							<th class="pkg-name">Name</th>
+							<th class="pkg-synopsis">Synopsis</th>
+						</tr>
+
+
+						<tr>
+							<td colspan="2"><a href="//pkg.go.dev/github.com/stfujnkk/">..</a></td>
+						</tr>
+
+
+
+						<tr>
+
+							<td class="pkg-name" style="padding-left: 0px;">
+								<a href="kit/index.htm">kit</a>
+							</td>
+
+							<td class="pkg-synopsis">
+
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+
+
+
+			<div id="footer">
+				Build version go1.16.2.<br>
+				Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+				the content of this page is licensed under the
+				Creative Commons Attribution 3.0 License,
+				and code is licensed under a <a href="https://github.com/stfujnkk/fp/blob/main/LICENSE">BSD
+					license</a>.<br>
+				<a href="https://golang.org/doc/tos.html">Terms of Service</a> |
+				<a href="https://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+			</div>
+
+		</div><!-- .container -->
+	</div><!-- #page -->
+
+
+</body>
+
+</html>

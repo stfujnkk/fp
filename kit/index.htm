@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#375EAB">
+	<title>kit - Go Documentation Server</title>
+	<base href="//stfujnkk.github.io/fp/">
+	<link type="text/css" rel="stylesheet" href="lib/style.css">
+	<script>window.initFuncs = [];</script>
+	<script src="lib/jquery.txt" defer="defer"></script>
+	<script>var goVersion = "go1.16.2";</script>
+	<script src="lib/godocs.txt" defer="defer"></script>
+</head>
+
+<body>
+
+	<div id="lowframe"
+		style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+		...
+	</div><!-- #lowframe -->
+
+	<div id="topbar" class="wide">
+		<div class="container">
+			<div class="top-heading" id="heading-wide"><a href="https://pkg.go.dev/">Go Documentation Server</a></div>
+			<div class="top-heading" id="heading-narrow"><a href="https://pkg.go.dev/">GoDoc</a></div>
+			<a href="#" id="menu-button"><span id="menu-button-arrow">▽</span></a>
+			<form method="GET" action="/search">
+				<div id="menu" style="min-width: 60px;">
+
+					<span class="search-box"><input type="search" id="search" name="q" placeholder="Search"
+							aria-label="Search" required=""><button type="submit"><span>
+								<!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24">
+									<title>submit search</title>
+									<path
+										d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+									</path>
+									<path d="M0 0h24v24H0z" fill="none"></path>
+								</svg>
+							</span></button></span>
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+
+
+	<div id="page" class="wide" style="outline: currentcolor none 0px;" tabindex="-1">
+		<div class="container">
+
+
+			<h1>
+				Package kit
+				<span class="text-muted"></span>
+			</h1>
+
+
+
+
+
+
+
+			<div id="nav"></div>
+
+
+			<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+			<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+			<script>
+				document.ANALYSIS_DATA = null;
+				document.CALLGRAPH = null;
+			</script>
+
+
+
+			<div id="short-nav">
+				<dl>
+					<dd><code>import "github.com/stfujnkk/fp/kit"</code></dd>
+				</dl>
+				<dl>
+					<dd><a href="#pkg-overview" class="overviewLink">Overview</a></dd>
+					<dd><a href="#pkg-index" class="indexLink">Index</a></dd>
+
+					<dd><a href="#pkg-examples" class="examplesLink">Examples</a></dd>
+
+
+				</dl>
+			</div>
+			<!-- The package's Name is printed as title by the top-level template -->
+			<div id="pkg-overview" class="toggleVisible">
+				<div class="collapsed">
+					<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+				</div>
+				<div class="expanded">
+					<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+
+
+				</div>
+			</div>
+
+			<div id="pkg-index" class="toggleVisible">
+				<div class="collapsed">
+					<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+				</div>
+				<div class="expanded">
+					<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+					<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+					<div id="manual-nav">
+						<dl>
+
+
+
+
+							<dd><a href="#Mask">func Mask(mask int64, obj interface{}) interface{}</a></dd>
+
+
+							<dd><a href="#Visit">func Visit(i int, obj interface{}) (unsafe.Pointer, uintptr)</a></dd>
+
+
+
+						</dl>
+					</div><!-- #manual-nav -->
+
+
+					<div id="pkg-examples">
+						<h3>Examples</h3>
+						<div class="js-expandAll expandAll collapsed">(Expand All)</div>
+						<dl>
+
+							<dd><a class="exampleLink" href="#example_Mask">Mask</a></dd>
+
+							<dd><a class="exampleLink" href="#example_Visit">Visit</a></dd>
+
+						</dl>
+					</div>
+
+
+
+					<h3>Package files</h3>
+					<p>
+						<span style="font-size:90%">
+
+							<a href="https://github.com/stfujnkk/fp/blob/main/kit/kit.go">kit.go</a>
+
+						</span>
+					</p>
+
+				</div><!-- .expanded -->
+			</div><!-- #pkg-index -->
+
+
+
+
+
+
+
+
+			<h2 id="Mask">func <a href="https://github.com/stfujnkk/fp/blob/main/kit/kit.go?s=1151:1201#L46">Mask</a>
+				<a class="permalink" href="#Mask">¶</a>
+
+
+			</h2>
+			<pre>func Mask(mask <a href="https://pkg.go.dev/builtin/#int64">int64</a>, obj interface{}) interface{}</pre>
+			<p>
+				根据mask屏蔽obj结构体里的一些字段,返回一个byte数组。
+				该数组可来作为map键。
+			</p>
+			<p>
+				Mask some fields in the obj structure and return a byte array.
+				This array can be used as a map key.
+			</p>
+
+			<div id="example_Mask" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code"><span class="comment">// 定义数据</span>
+<span class="comment">// Define type</span>
+type data struct {
+    Num int
+    x   string
+    t   time.Time
+}
+
+type data1 struct {
+    Num int
+    j   bool
+    x   string
+}
+var a1, a2, a3 data
+<span class="comment">// Mask 可以传入指针也可以传值</span>
+<span class="comment">// Mask can pass in a pointer or a value</span>
+fmt.Println(Mask(1, &amp;a1) == Mask(1, &amp;a2))
+fmt.Println(Mask(7, a1) == Mask(7, a2))
+<span class="comment">// 嵌套结构</span>
+<span class="comment">// Nested structure</span>
+a3.t = time.Now()
+a2.t, _ = time.Parse("2006-01-02 15:04", "2020-12-14 10:12")
+<span class="comment">// 不同mask</span>
+<span class="comment">// Different masks</span>
+fmt.Println(Mask(4, &amp;a2) == Mask(3, &amp;a3))
+fmt.Println(Mask(3, &amp;a2) == Mask(3, &amp;a3))
+<span class="comment">// 不同的 time.Time 结构体</span>
+<span class="comment">// Different time.Time structures</span>
+a3.t, _ = time.Parse("2006-01-02 15:04", "2020-12-14 10:12")
+fmt.Println(Mask(6, &amp;a2) == Mask(6, &amp;a3))
+<span class="comment">// 不同类型之间的比较</span>
+<span class="comment">// Comparison between different types</span>
+a3.Num, a3.x = 0, "asx"
+aa := data1{
+    0,
+    false,
+    "asx",
+}
+fmt.Println(Mask(5, aa) == Mask(3, a3))
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">true
+true
+false
+true
+true
+true
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+			<h2 id="Visit">func <a href="https://github.com/stfujnkk/fp/blob/main/kit/kit.go?s=738:798#L33">Visit</a>
+				<a class="permalink" href="#Visit">¶</a>
+
+
+			</h2>
+			<pre>func Visit(i <a href="https://pkg.go.dev/builtin/#int">int</a>, obj interface{}) (<a href="https://pkg.go.dev/unsafe/">unsafe</a>.<a href="https://pkg.go.dev/unsafe/#Pointer">Pointer</a>, <a href="https://pkg.go.dev/builtin/#uintptr">uintptr</a>)</pre>
+			<p>
+				访问obj结构体的第i个字段，返回字段的地址和长度
+				Access the ith field of obj structure and return the address and length of the field
+			</p>
+
+			<div id="example_Visit" class="toggle">
+				<div class="collapsed">
+					<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+				</div>
+				<div class="expanded">
+					<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+
+
+
+					<p>Code:</p>
+					<pre class="code">type data struct {
+    Public  int
+    private string
+}
+a := data{
+    334700,
+    "test",
+}
+<span class="comment">// 可以传入指针也可以传值</span>
+<span class="comment">// can pass in a pointer or a value</span>
+
+<span class="comment">// 访问公有字段</span>
+<span class="comment">// Access public fields</span>
+ptr, size := Visit(0, a)
+fmt.Println(*(*int)(ptr), size)
+<span class="comment">// 访问私有字段</span>
+<span class="comment">// Access private fields</span>
+ptr, size = Visit(1, &amp;a)
+fmt.Println(*(*string)(ptr), size)
+<span class="comment"></span></pre>
+
+					<p>Output:</p>
+					<pre class="output">334700 8
+test 16
+</pre>
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<div id="footer">
+				Build version go1.16.2.<br>
+				Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+				the content of this page is licensed under the
+				Creative Commons Attribution 3.0 License,
+				and code is licensed under a <a href="https://github.com/stfujnkk/fp/blob/main/LICENSE">BSD
+					license</a>.<br>
+				<a href="https://golang.org/doc/tos.html">Terms of Service</a> |
+				<a href="https://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+			</div>
+
+		</div><!-- .container -->
+	</div><!-- #page -->
+
+
+</body>
+
+</html>
