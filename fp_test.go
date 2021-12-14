@@ -2,6 +2,8 @@ package fp
 
 import (
 	"fmt"
+
+	"github.com/stfujnkk/fp/kit"
 )
 
 func ExampleFmap() {
@@ -102,15 +104,15 @@ func ExampleCurrying() {
 	add2 := func(a, b int) int {
 		return a + b
 	}
-	add1 := Currying(7, add2)
+	add1 := Currying(add2, 7)
 	fmt.Printf("%T : %v\n", add1(2), add1(2))
 	// 连续柯里化
 	// Compound Currying
-	res := Currying(3, add1)
+	res := Currying(add1, 3)
 	fmt.Printf("%T : %v\n", res(), res())
 	// 固定多个参数
 	// Fix multiple parameters
-	res2 := Currying([]int{7, 9}, add2)
+	res2 := Currying(add2, 7, 9)
 	fmt.Printf("%T : %v\n", res2(), res2())
 	// 和Fmap复合使用
 	// Combined with fmap
@@ -120,8 +122,8 @@ func ExampleCurrying() {
 	swap2 := func(a, b int) (int, int) {
 		return b, a
 	}
-	swap1 := Currying(7, swap2)
-	swap0 := Currying(3, swap1)
+	swap1 := Currying(swap2, 7)
+	swap0 := Currying(swap1, 3)
 	fmt.Printf("%#v\n", swap0())
 	// Output:
 	// int : 9
@@ -162,7 +164,7 @@ func ExampleReduce() {
 	collect := func(r *[]float64, b float64) {
 		*r = append(*r, b)
 	}
-	Reduce(&box, collect, data)
+	Reduce(collect, &box, data)
 	fmt.Printf("%#v\n", box)
 	// Output:
 	// []float64{5, 76, 67, 69, 70, -7, 8}
@@ -216,4 +218,79 @@ func ExampleUnzipWith2() {
 	// Output:
 	// []int{7, -2, 0}
 	// []int{7, -2, 0}
+}
+
+func ExampleGroup() {
+	// 药品信息结构体
+	// Drug information structure
+	type Drug struct {
+		Name        string
+		Producer    string
+		Price       float32
+		salesVolume int
+	}
+	data := []Drug{
+		{"氟哌酸", "上海医药", 10.13, 476},
+		{"氟哌酸", "智飞生物", 12.01, 312},
+		{"洛贝林", "石药集团", 5.89, 621},
+		{"甲硝唑", "哈药集团", 3.13, 781},
+		{"洛贝林", "恒瑞", 6.54, 437},
+	}
+	// 根据药品名称分组
+	// Grouping by drug name
+	m := Group(1, data)
+	drugs := make([]Drug, 0, len(m))
+	// 不保证顺序
+	// Sequence is not guaranteed
+	k := kit.Mask(1, data[0])
+	for _, v := range m[k] {
+		drugs = append(drugs, v.(Drug))
+	}
+	fmt.Println(drugs)
+	// Output:
+	// [{氟哌酸 上海医药 10.13 476} {氟哌酸 智飞生物 12.01 312}]
+}
+
+func ExampleGroupThenReduce() {
+	// 药品信息结构体
+	// Drug information structure
+	type Drug struct {
+		Name        string
+		Producer    string
+		Price       float32
+		salesVolume int
+	}
+	data := []Drug{
+		{"氟哌酸", "上海医药", 10.13, 476},
+		{"氟哌酸", "智飞生物", 12.01, 312},
+		{"洛贝林", "石药集团", 5.89, 621},
+		{"甲硝唑", "哈药集团", 3.13, 781},
+		{"洛贝林", "恒瑞", 6.54, 437},
+	}
+	// 药品销售额结构体
+	// Drug sales structure
+	type SaleOfDrug struct {
+		Name        string
+		TotalAmount float32
+	}
+	// 统计函数
+	// Statistical function
+	acc := func(s *SaleOfDrug, d Drug) {
+		if s == nil {
+			// 统计第一个时创建一个 SaleOfDrug
+			// Create a SaleOfDrug when counting the first
+			s = &SaleOfDrug{
+				d.Name,
+				d.Price * float32(d.salesVolume),
+			}
+		} else {
+			(*s).Name = d.Name
+			(*s).TotalAmount += d.Price * float32(d.salesVolume)
+		}
+	}
+	res := make([]SaleOfDrug, 30)
+	n := GroupThenReduce(1, acc, &res, data)
+	fmt.Println(res[:n])
+	// Output:
+	// [{氟哌酸 8569} {洛贝林 6515.67} {甲硝唑 2444.53}]
 }

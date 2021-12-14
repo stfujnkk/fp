@@ -7,6 +7,8 @@ package fp
 import (
 	"fmt"
 	"reflect"
+
+	"github.com/stfujnkk/fp/kit"
 )
 
 /*
@@ -53,7 +55,7 @@ func Filter(fx interface{}, arr interface{}) []interface{} {
 /*
 把 a 转换为数组。
 若a不是数组,则用一个长度为1的数组包装。
-*/ 
+*/
 /*
 Convert a to an array.
 If a is not an array, wrap it with an array of length 1.
@@ -257,18 +259,17 @@ Currying可以固定一个函数的前几个参数。
 P is the parameter list and FX is the function. Returns a HalfFunc.
 Currying can fix the first few parameters of a function.
 */
-func Currying(p, fx interface{}) HalfFunc {
+func Currying(fx interface{}, p ...interface{}) HalfFunc {
 	f := reflect.ValueOf(fx)
 	return func(arr ...interface{}) interface{} {
-		pp := toArr(p)
-		n, pl := len(arr)+len(pp), len(pp)
+		n, pl := len(arr)+len(p), len(p)
 		if n != f.Type().NumIn() {
 			msg := fmt.Sprintf("Takes %d positional argument but %d were given\n", f.Type().NumIn(), n)
 			panic("Wrong number of parameters\n" + msg)
 		}
 		ps := make([]reflect.Value, n)
-		for i := range pp {
-			ps[i] = reflect.ValueOf(pp[i])
+		for i := range p {
+			ps[i] = reflect.ValueOf(p[i])
 		}
 		for i := pl; i < n; i++ {
 			ps[i] = reflect.ValueOf(arr[i-pl])
@@ -289,7 +290,7 @@ fx函数应接收两个参数,一个为resPtr,另一个为arr中的元素。
 The FX function should take two arguments, one resptr and the other an element in arr.
 This function traverses the ARR and calls the FX function.
 */
-func Reduce(resPtr, fx, arr interface{}) {
+func Reduce(fx, resPtr, arr interface{}) {
 	a, f := toArr(arr), reflect.ValueOf(fx)
 	for i := range a {
 		f.Call([]reflect.Value{reflect.ValueOf(resPtr), reflect.ValueOf(a[i])})
@@ -350,4 +351,51 @@ func Pipe(fx1, fx2 interface{}) HalfFunc {
 		}
 		return rs
 	}
+}
+
+/*
+根据mask对arr分组，返回map。map键的类型为byte数组。注意不是切片,golang中切片无法比较。
+*/
+/*
+Group arr according to mask and return map. The type of map key is byte array. Note that it is not a slice. Slices in golang cannot be compared.
+*/
+func Group(mask int64, arr interface{}) map[interface{}][]interface{} {
+	a := toArr(arr)
+	m := make(map[interface{}][]interface{}, len(a))
+	for i := range a {
+		k := kit.Mask(mask, a[i])
+		v, ok := m[k]
+		if !ok {
+			v = make([]interface{}, 0, 3)
+		}
+		v = append(v, a[i])
+		m[k] = v
+	}
+	return m
+}
+
+/*
+
+根据mask对arr分组，对每组列表的元素都应用一次reducer函数,并把结果存在res里。
+最后返回结果列表长度。
+*/
+/*
+Group the ARR according to the mask, apply the reducer function to the elements of each list, and store the results in res.
+Length of the last returned result list.
+*/
+func GroupThenReduce(mask int64, reducer, res, arr interface{}) int {
+	m, i := Group(mask, arr), 0
+	a, f := reflect.ValueOf(res).Elem(), reflect.ValueOf(reducer)
+	for _, v := range m {
+		for j := range v {
+			f.Call(
+				[]reflect.Value{
+					a.Index(i).Addr(),
+					reflect.ValueOf(v[j]),
+				},
+			)
+		}
+		i++
+	}
+	return i
 }
