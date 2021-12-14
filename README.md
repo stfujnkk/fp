@@ -1,5 +1,5 @@
 # FP is a lightweight functional programming library
-## [Sample document](http://htmlpreview.github.io/?https://github.com/stfujnkk/fp/blob/main/docs/fp%20-%20Go%20Documentation%20Server.htm)
+## [Sample document](https://pkg.go.dev/github.com/stfujnkk/fp)
 ---
 ## Main interface
 ```txt
