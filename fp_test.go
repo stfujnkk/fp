@@ -251,7 +251,7 @@ func ExampleGroup() {
 	// [{氟哌酸 上海医药 10.13 476} {氟哌酸 智飞生物 12.01 312}]
 }
 
-func ExampleGroupThenReduce() {
+func ExampleGroupReduce() {
 	// 药品信息结构体
 	// Drug information structure
 	type Drug struct {
