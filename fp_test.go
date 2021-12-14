@@ -289,7 +289,7 @@ func ExampleGroupThenReduce() {
 		}
 	}
 	res := make([]SaleOfDrug, 30)
-	n := GroupThenReduce(1, acc, &res, data)
+	n :=GroupReduce(1, acc, &res, data)
 	fmt.Println(res[:n])
 	// Output:
 	// [{氟哌酸 8569} {洛贝林 6515.67} {甲硝唑 2444.53}]

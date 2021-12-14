@@ -1,27 +1,26 @@
-# FP is a lightweight functional programming library
-## [Sample document](https://pkg.go.dev/github.com/stfujnkk/fp)
----
-## Main interface
-```txt
-func Filter(fx interface{}, arr interface{}) []interface{}        
-func Filter2(fx, arr, resPtr interface{}) int
-func Flat(arr interface{}) []interface{}
-func Flat2(arr interface{}, resPtr interface{}) int
-func Fmap(fx interface{}, arr interface{}) []interface{}
-func Fmap2(fx, arr, resPtr interface{}) int
-func Fold(fx, arr interface{}) interface{}
-func Fold2(fx, arr, resPtr interface{})
-func Reduce(resPtr, fx, arr interface{})
-func UnzipWith(fx, arr interface{}) ([]interface{}, []interface{})
-func UnzipWith2(fx, arr, resPtr1, resPtr2 interface{}) int        
-func ZipWith(fx, arr1, arr2 interface{}) []interface{}
-func ZipWith2(fx, arr1, arr2, resPtr interface{}) int
-type HalfFunc func(...interface{}) interface{}
-    func Currying(p, fx interface{}) HalfFunc
-    func Pipe(fx1, fx2 interface{}) HalfFunc
-```
+[TOC]
+
+## brief introduction
+fp is a lightweight functional programming library
+[**Sample document**](https://pkg.go.dev/github.com/stfujnkk/fp)
+
+## Version compatible
+
+- **v0.0.1**
+
+  Naming habits: adding 2 after the function name means to which means you can specify where the results are stored. The advantage is that you can add type information. You don't have to type assertions one by one.
+
+- **v0.1.0**
+
+  This version changes the position of some parameters because it is more convenient to Coriolis fixed parameters. Put the parameters that can control the behavior on the left and the parameters that transfer data on the right. For example, `reduce (resptr, fX, arr interface {})` is changed to `reduce (fX, resptr, arr interface {}`. Therefore, this also leads to and **v0.0.1** incompatible. In addition, three functions are added: ` group, visit, groupreduce and mask`
+
+
+
+
+
 ## Future plans
 In the future, it will join the goruntine pool
 Improve concurrency efficiency.
 
-Add some functional functions, such as TakeWhile, Generator and Infinite list.
+Add some functional functions, such as `TakeWhile`, `Generator` and `Infinite list`.
+

@@ -383,7 +383,7 @@ func Group(mask int64, arr interface{}) map[interface{}][]interface{} {
 Group the ARR according to the mask, apply the reducer function to the elements of each list, and store the results in res.
 Length of the last returned result list.
 */
-func GroupThenReduce(mask int64, reducer, res, arr interface{}) int {
+func GroupReduce(mask int64, reducer, res, arr interface{}) int {
 	m, i := Group(mask, arr), 0
 	a, f := reflect.ValueOf(res).Elem(), reflect.ValueOf(reducer)
 	for _, v := range m {
