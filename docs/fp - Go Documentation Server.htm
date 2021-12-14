@@ -205,6 +205,8 @@ Simple functional programming library
 			
 			<dd><a class="exampleLink" href="#example_Group">Group</a></dd>
 			
+			<dd><a class="exampleLink" href="#example_GroupReduce">GroupReduce</a></dd>
+			
 			<dd><a class="exampleLink" href="#example_Pipe">Pipe</a></dd>
 			
 			<dd><a class="exampleLink" href="#example_Reduce">Reduce</a></dd>
@@ -690,7 +692,65 @@ Group the ARR according to the mask, apply the reducer function to the elements 
 Length of the last returned result list.
 </p>
 
+			<div id="example_GroupReduce" class="toggle">
+	<div class="collapsed">
+		<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+	</div>
+	<div class="expanded">
+		<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+		
+		
+		
+			<p>Code:</p>
+			<pre class="code"><span class="comment">// 药品信息结构体</span>
+<span class="comment">// Drug information structure</span>
+type Drug struct {
+    Name        string
+    Producer    string
+    Price       float32
+    salesVolume int
+}
+data := []Drug{
+    {"氟哌酸", "上海医药", 10.13, 476},
+    {"氟哌酸", "智飞生物", 12.01, 312},
+    {"洛贝林", "石药集团", 5.89, 621},
+    {"甲硝唑", "哈药集团", 3.13, 781},
+    {"洛贝林", "恒瑞", 6.54, 437},
+}
+<span class="comment">// 药品销售额结构体</span>
+<span class="comment">// Drug sales structure</span>
+type SaleOfDrug struct {
+    Name        string
+    TotalAmount float32
+}
+<span class="comment">// 统计函数</span>
+<span class="comment">// Statistical function</span>
+acc := func(s *SaleOfDrug, d Drug) {
+    if s == nil {
+        <span class="comment">// 统计第一个时创建一个 SaleOfDrug</span>
+        <span class="comment">// Create a SaleOfDrug when counting the first</span>
+        s = &amp;SaleOfDrug{
+            d.Name,
+            d.Price * float32(d.salesVolume),
+        }
+    } else {
+        (*s).Name = d.Name
+        (*s).TotalAmount += d.Price * float32(d.salesVolume)
+    }
+}
+res := make([]SaleOfDrug, 30)
+n := GroupReduce(1, acc, &amp;res, data)
+fmt.Println(res[:n])
+<span class="comment"></span></pre>
 			
+			<p>Output:</p>
+			<pre class="output">[{氟哌酸 8569} {洛贝林 6515.67} {甲硝唑 2444.53}]
+</pre>
+			
+		
+	</div>
+</div>
+
 			
 
 		
