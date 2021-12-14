@@ -85,6 +85,8 @@
 				<dd><a href="#pkg-examples" class="examplesLink">Examples</a></dd>
 			
 			
+				<dd><a href="#pkg-subdirectories">Subdirectories</a></dd>
+			
 			</dl>
 		</div>
 		<!-- The package's Name is printed as title by the top-level template -->
@@ -141,7 +143,13 @@ Simple functional programming library
 				<dd><a href="#Fold2">func Fold2(fx, arr, resPtr interface{})</a></dd>
 			
 				
-				<dd><a href="#Reduce">func Reduce(resPtr, fx, arr interface{})</a></dd>
+				<dd><a href="#Group">func Group(mask int64, arr interface{}) map[interface{}][]interface{}</a></dd>
+			
+				
+				<dd><a href="#GroupReduce">func GroupReduce(mask int64, reducer, res, arr interface{}) int</a></dd>
+			
+				
+				<dd><a href="#Reduce">func Reduce(fx, resPtr, arr interface{})</a></dd>
 			
 				
 				<dd><a href="#UnzipWith">func UnzipWith(fx, arr interface{}) ([]interface{}, []interface{})</a></dd>
@@ -160,7 +168,7 @@ Simple functional programming library
 				<dd><a href="#HalfFunc">type HalfFunc</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="#Currying">func Currying(p, fx interface{}) HalfFunc</a></dd>
+					<dd>&nbsp; &nbsp; <a href="#Currying">func Currying(fx interface{}, p ...interface{}) HalfFunc</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="#Pipe">func Pipe(fx1, fx2 interface{}) HalfFunc</a></dd>
@@ -194,6 +202,8 @@ Simple functional programming library
 			<dd><a class="exampleLink" href="#example_Fold">Fold</a></dd>
 			
 			<dd><a class="exampleLink" href="#example_Fold2">Fold2</a></dd>
+			
+			<dd><a class="exampleLink" href="#example_Group">Group</a></dd>
 			
 			<dd><a class="exampleLink" href="#example_Pipe">Pipe</a></dd>
 			
@@ -231,7 +241,7 @@ Simple functional programming library
 		
 			
 			
-			<h2 id="Filter">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=835:893#L30">Filter</a>
+			<h2 id="Filter">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=868:926#L32">Filter</a>
 				<a class="permalink" href="#Filter">¶</a>
 				
 				
@@ -278,7 +288,7 @@ fmt.Printf("%#v\n", Filter(fx, ids))
 		
 			
 			
-			<h2 id="Filter2">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=2256:2301#L76">Filter2</a>
+			<h2 id="Filter2">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=2288:2333#L78">Filter2</a>
 				<a class="permalink" href="#Filter2">¶</a>
 				
 				
@@ -330,7 +340,7 @@ fmt.Printf("%#v\n", ids[:n])
 		
 			
 			
-			<h2 id="Flat">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=2444:2484#L88">Flat</a>
+			<h2 id="Flat">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=2476:2516#L90">Flat</a>
 				<a class="permalink" href="#Flat">¶</a>
 				
 				
@@ -375,7 +385,7 @@ fmt.Printf("%#v\n", Flat(arr))
 		
 			
 			
-			<h2 id="Flat2">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=2818:2869#L103">Flat2</a>
+			<h2 id="Flat2">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=2850:2901#L105">Flat2</a>
 				<a class="permalink" href="#Flat2">¶</a>
 				
 				
@@ -422,7 +432,7 @@ fmt.Printf("%#v\n", res[:n])
 		
 			
 			
-			<h2 id="Fmap">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=3027:3083#L115">Fmap</a>
+			<h2 id="Fmap">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=3059:3115#L117">Fmap</a>
 				<a class="permalink" href="#Fmap">¶</a>
 				
 				
@@ -464,7 +474,7 @@ fmt.Printf("%#v\n", Fmap(square, []int{4, 7}))
 		
 			
 			
-			<h2 id="Fmap2">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=5860:5903#L227">Fmap2</a>
+			<h2 id="Fmap2">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=5892:5935#L229">Fmap2</a>
 				<a class="permalink" href="#Fmap2">¶</a>
 				
 				
@@ -508,7 +518,7 @@ fmt.Printf("%#v\n", res[:n])
 		
 			
 			
-			<h2 id="Fold">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=4566:4608#L177">Fold</a>
+			<h2 id="Fold">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=4598:4640#L179">Fold</a>
 				<a class="permalink" href="#Fold">¶</a>
 				
 				
@@ -553,7 +563,7 @@ fmt.Printf("%T : %v\n", Fold(sum, ids), Fold(sum, ids))
 		
 			
 			
-			<h2 id="Fold2">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=5171:5210#L198">Fold2</a>
+			<h2 id="Fold2">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=5203:5242#L200">Fold2</a>
 				<a class="permalink" href="#Fold2">¶</a>
 				
 				
@@ -600,12 +610,98 @@ fmt.Printf("%T : %v\n", a, a)
 		
 			
 			
-			<h2 id="Reduce">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=7269:7309#L282">Reduce</a>
+			<h2 id="Group">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=9402:9471#L352">Group</a>
+				<a class="permalink" href="#Group">¶</a>
+				
+				
+			</h2>
+			<pre>func Group(mask <a href="http://localhost:8080/pkg/builtin/#int64">int64</a>, arr interface{}) map[interface{}][]interface{}</pre>
+			<p>
+根据mask对arr分组，返回map。map键的类型为byte数组。注意不是切片,golang中切片无法比较。
+</p>
+<p>
+Group arr according to mask and return map. The type of map key is byte 
+array. Note that it is not a slice. Slices in golang cannot be compared.
+</p>
+
+			<div id="example_Group" class="toggle">
+	<div class="collapsed">
+		<p class="exampleHeading toggleButton">▹ <span class="text">Example</span></p>
+	</div>
+	<div class="expanded">
+		<p class="exampleHeading toggleButton">▾ <span class="text">Example</span></p>
+		
+		
+		
+			<p>Code:</p>
+			<pre class="code"><span class="comment">// 药品信息结构体</span>
+<span class="comment">// Drug information structure</span>
+type Drug struct {
+    Name        string
+    Producer    string
+    Price       float32
+    salesVolume int
+}
+data := []Drug{
+    {"氟哌酸", "上海医药", 10.13, 476},
+    {"氟哌酸", "智飞生物", 12.01, 312},
+    {"洛贝林", "石药集团", 5.89, 621},
+    {"甲硝唑", "哈药集团", 3.13, 781},
+    {"洛贝林", "恒瑞", 6.54, 437},
+}
+<span class="comment">// 根据药品名称分组</span>
+<span class="comment">// Grouping by drug name</span>
+m := Group(1, data)
+drugs := make([]Drug, 0, len(m))
+<span class="comment">// 不保证顺序</span>
+<span class="comment">// Sequence is not guaranteed</span>
+k := kit.Mask(1, data[0])
+for _, v := range m[k] {
+    drugs = append(drugs, v.(Drug))
+}
+fmt.Println(drugs)
+<span class="comment"></span></pre>
+			
+			<p>Output:</p>
+			<pre class="output">[{氟哌酸 上海医药 10.13 476} {氟哌酸 智飞生物 12.01 312}]
+</pre>
+			
+		
+	</div>
+</div>
+
+			
+
+		
+			
+			
+			<h2 id="GroupReduce">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=10044:10107#L376">GroupReduce</a>
+				<a class="permalink" href="#GroupReduce">¶</a>
+				
+				
+			</h2>
+			<pre>func GroupReduce(mask <a href="http://localhost:8080/pkg/builtin/#int64">int64</a>, reducer, res, arr interface{}) <a href="http://localhost:8080/pkg/builtin/#int">int</a></pre>
+			<p>
+根据mask对arr分组，对每组列表的元素都应用一次reducer函数,并把结果存在res里。
+最后返回结果列表长度。
+</p>
+<p>
+Group the ARR according to the mask, apply the reducer function to the elements of each list, and store the results in res.
+Length of the last returned result list.
+</p>
+
+			
+			
+
+		
+			
+			
+			<h2 id="Reduce">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=7294:7334#L283">Reduce</a>
 				<a class="permalink" href="#Reduce">¶</a>
 				
 				
 			</h2>
-			<pre>func Reduce(resPtr, fx, arr interface{})</pre>
+			<pre>func Reduce(fx, resPtr, arr interface{})</pre>
 			<p>
 fx函数应接收两个参数,一个为resPtr,另一个为arr中的元素。
 该函数遍历arr,并调用fx函数。
@@ -630,7 +726,7 @@ data := []float64{5, 76, 67, 69, 70, -7, 8}
 collect := func(r *[]float64, b float64) {
     *r = append(*r, b)
 }
-Reduce(&amp;box, collect, data)
+Reduce(collect, &amp;box, data)
 fmt.Printf("%#v\n", box)
 <span class="comment"></span></pre>
 			
@@ -647,7 +743,7 @@ fmt.Printf("%#v\n", box)
 		
 			
 			
-			<h2 id="UnzipWith">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=7537:7603#L295">UnzipWith</a>
+			<h2 id="UnzipWith">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=7562:7628#L296">UnzipWith</a>
 				<a class="permalink" href="#UnzipWith">¶</a>
 				
 				
@@ -692,7 +788,7 @@ fmt.Printf("%#v\n", b)
 		
 			
 			
-			<h2 id="UnzipWith2">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=8039:8097#L311">UnzipWith2</a>
+			<h2 id="UnzipWith2">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=8064:8122#L312">UnzipWith2</a>
 				<a class="permalink" href="#UnzipWith2">¶</a>
 				
 				
@@ -738,7 +834,7 @@ fmt.Printf("%#v\n", b[:n])
 		
 			
 			
-			<h2 id="ZipWith">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=3594:3648#L143">ZipWith</a>
+			<h2 id="ZipWith">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=3626:3680#L145">ZipWith</a>
 				<a class="permalink" href="#ZipWith">¶</a>
 				
 				
@@ -788,7 +884,7 @@ fmt.Printf("%#v\n", ZipWith(NewStudent, ids, names))
 		
 			
 			
-			<h2 id="ZipWith2">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=4162:4215#L163">ZipWith2</a>
+			<h2 id="ZipWith2">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=4194:4247#L165">ZipWith2</a>
 				<a class="permalink" href="#ZipWith2">¶</a>
 				
 				
@@ -841,7 +937,7 @@ fmt.Printf("%#v\n", stus[:n])
 		
 			
 			
-			<h2 id="HalfFunc">type <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=6041:6087#L239">HalfFunc</a>
+			<h2 id="HalfFunc">type <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=6073:6119#L241">HalfFunc</a>
 				<a class="permalink" href="#HalfFunc">¶</a>
 				
 				
@@ -865,12 +961,12 @@ Function with partial parameters fixed.
 
 			
 				
-				<h3 id="Currying">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=6349:6390#L250">Currying</a>
+				<h3 id="Currying">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=6381:6437#L252">Currying</a>
 					<a class="permalink" href="#Currying">¶</a>
 					
 					
 				</h3>
-				<pre>func Currying(p, fx interface{}) <a href="#HalfFunc">HalfFunc</a></pre>
+				<pre>func Currying(fx interface{}, p ...interface{}) <a href="#HalfFunc">HalfFunc</a></pre>
 				<p>
 p 为参数列表,fx 为函数。
 返回一个HalfFunc。
@@ -894,15 +990,15 @@ Currying can fix the first few parameters of a function.
 			<pre class="code">add2 := func(a, b int) int {
     return a + b
 }
-add1 := Currying(7, add2)
+add1 := Currying(add2, 7)
 fmt.Printf("%T : %v\n", add1(2), add1(2))
 <span class="comment">// 连续柯里化</span>
 <span class="comment">// Compound Currying</span>
-res := Currying(3, add1)
+res := Currying(add1, 3)
 fmt.Printf("%T : %v\n", res(), res())
 <span class="comment">// 固定多个参数</span>
 <span class="comment">// Fix multiple parameters</span>
-res2 := Currying([]int{7, 9}, add2)
+res2 := Currying(add2, 7, 9)
 fmt.Printf("%T : %v\n", res2(), res2())
 <span class="comment">// 和Fmap复合使用</span>
 <span class="comment">// Combined with fmap</span>
@@ -912,8 +1008,8 @@ fmt.Printf("%#v\n", Fmap(add1, []int{4, -3}))
 swap2 := func(a, b int) (int, int) {
     return b, a
 }
-swap1 := Currying(7, swap2)
-swap0 := Currying(3, swap1)
+swap1 := Currying(swap2, 7)
+swap0 := Currying(swap1, 3)
 fmt.Printf("%#v\n", swap0())
 <span class="comment"></span></pre>
 			
@@ -932,7 +1028,7 @@ int : 16
 				
 			
 				
-				<h3 id="Pipe">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=8637:8677#L330">Pipe</a>
+				<h3 id="Pipe">func <a href="http://localhost:8080/src/github.com/stfujnkk/fp/fp.go?s=8662:8702#L331">Pipe</a>
 					<a class="permalink" href="#Pipe">¶</a>
 					
 					
@@ -1003,6 +1099,38 @@ fmt.Printf("%#v\n", f2(8))
 
 
 
+
+	
+	
+		<h2 id="pkg-subdirectories">Subdirectories <a class="permalink" href="#pkg-subdirectories">¶</a></h2>
+	
+	<div class="pkg-dir">
+		<table>
+			<tbody><tr>
+				<th class="pkg-name">Name</th>
+				<th class="pkg-synopsis">Synopsis</th>
+			</tr>
+
+			
+			<tr>
+				<td colspan="2"><a href="http://localhost:8080/pkg/github.com/stfujnkk/">..</a></td>
+			</tr>
+			
+
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="http://localhost:8080/pkg/github.com/stfujnkk/fp/kit/">kit</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						
+					</td>
+				</tr>
+			
+		</tbody></table>
+	</div>
 
 
 
