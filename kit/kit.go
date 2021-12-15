@@ -16,7 +16,7 @@ func init() {
 	byteType = reflect.TypeOf(b)
 }
 
-/* 如果obj是指针返回他指向的类型。否者返回自己的类型 */
+/* 如果obj是指针返回他指向的类型。否则返回自己的类型 */
 /* If obj is a pointer, return the type it points to. If not, return your own type */
 func maybePtr(obj interface{}) reflect.Type {
 	o := reflect.TypeOf(obj)
