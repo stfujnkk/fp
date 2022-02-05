@@ -1,9 +1,9 @@
 ## brief introduction
 fp is a lightweight functional programming library
 
-[** pkg.go.dev **](https://pkg.go.dev/github.com/stfujnkk/fp)
+[**pkg.go.dev**](https://pkg.go.dev/github.com/stfujnkk/fp)
 
-[**Github document**](https://stfujnkk.github.io/fp/)
+[**Github doc**](https://stfujnkk.github.io/fp/)
 
 ## Version compatible
 
