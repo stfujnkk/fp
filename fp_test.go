@@ -220,37 +220,6 @@ func ExampleUnzipWith2() {
 	// []int{7, -2, 0}
 }
 
-func ExampleGroup() {
-	// 药品信息结构体
-	// Drug information structure
-	type Drug struct {
-		Name        string
-		Producer    string
-		Price       float32
-		salesVolume int
-	}
-	data := []Drug{
-		{"氟哌酸", "上海医药", 10.13, 476},
-		{"氟哌酸", "智飞生物", 12.01, 312},
-		{"洛贝林", "石药集团", 5.89, 621},
-		{"甲硝唑", "哈药集团", 3.13, 781},
-		{"洛贝林", "恒瑞", 6.54, 437},
-	}
-	// 根据药品名称分组
-	// Grouping by drug name
-	m := Group(1, data)
-	drugs := make([]Drug, 0, len(m))
-	// 不保证顺序
-	// Sequence is not guaranteed
-	k := kit.Mask(1, data[0])
-	for _, v := range m[k] {
-		drugs = append(drugs, v.(Drug))
-	}
-	fmt.Println(drugs)
-	// Output:
-	// [{氟哌酸 上海医药 10.13 476} {氟哌酸 智飞生物 12.01 312}]
-}
-
 func ExampleGroupReduce() {
 	// 药品信息结构体
 	// Drug information structure
@@ -293,4 +262,35 @@ func ExampleGroupReduce() {
 	fmt.Println(res[:n])
 	// Output:
 	// [{氟哌酸 8569} {洛贝林 6515.67} {甲硝唑 2444.53}]
+}
+
+func ExampleGroup() {
+	// 药品信息结构体
+	// Drug information structure
+	type Drug struct {
+		Name        string
+		Producer    string
+		Price       float32
+		salesVolume int
+	}
+	data := []Drug{
+		{"氟哌酸", "上海医药", 10.13, 476},
+		{"氟哌酸", "智飞生物", 12.01, 312},
+		{"洛贝林", "石药集团", 5.89, 621},
+		{"甲硝唑", "哈药集团", 3.13, 781},
+		{"洛贝林", "恒瑞", 6.54, 437},
+	}
+	// 根据药品名称分组
+	// Grouping by drug name
+	m := Group(1, data)
+	drugs := make([]Drug, 0, len(m))
+	// 不保证顺序
+	// Sequence is not guaranteed
+	k := kit.Mask(1, data[0])
+	for _, v := range m[k] {
+		drugs = append(drugs, v.(Drug))
+	}
+	fmt.Println(drugs)
+	// Output:
+	// [{氟哌酸 上海医药 10.13 476} {氟哌酸 智飞生物 12.01 312}]
 }
